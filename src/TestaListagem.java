@@ -3,10 +3,9 @@ import java.sql.*;
 public class TestaListagem {
 
     public static void main(String[] args) throws SQLException {
-        //Abrindo conexão ao banco de dados
-        Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC",
-                        "root", "bd@Lucas95");
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection =  connectionFactory.RecuperaConexao();
+        
         //Criando e executando Statement para consulta do banco de dados
         Statement statement = connection.createStatement();
         statement.execute("SELECT * FROM PRODUTO");
