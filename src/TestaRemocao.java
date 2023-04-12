@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -7,9 +8,12 @@ public class TestaRemocao {
         //Criando uma nova conexão ao banco de dados
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.RecuperaConexao();
-        //Criando e executando um Statement para remoção de registros no banco de dados
-        Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM PRODUTO WHERE id > 2");
+        //Preparando um Statement para remoção de registros no banco de dados
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUTO WHERE id > ?");
+        //definindo o valor do parâmetro
+        statement.setInt(1, 2);
+        //Executando o Statement
+        statement.execute();
         //Contando o numero de registros que foram modificados
         int linhasModificadas = statement.getUpdateCount();
         //Imprimindo a quantidade de linhas modificadas

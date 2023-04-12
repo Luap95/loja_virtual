@@ -7,8 +7,8 @@ public class TestaListagem {
         Connection connection =  connectionFactory.RecuperaConexao();
         
         //Criando e executando Statement para consulta do banco de dados
-        Statement statement = connection.createStatement();
-        statement.execute("SELECT * FROM PRODUTO");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM PRODUTO");
+        statement.execute();
         //Recebendo o resultado da consulta
         ResultSet resultSet = statement.getResultSet();
         //Percorrendo e imprimindo todos os registros da consulta
