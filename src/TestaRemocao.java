@@ -18,5 +18,8 @@ public class TestaRemocao {
         int linhasModificadas = statement.getUpdateCount();
         //Imprimindo a quantidade de linhas modificadas
         System.out.println("O total de linhas modicadas: " + linhasModificadas);
+        System.out.println("Fechando a conexão!!!");
+        //Fechando a conexão
+        connection.close();
     }
 }

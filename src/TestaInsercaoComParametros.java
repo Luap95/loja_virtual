@@ -28,5 +28,8 @@ public class TestaInsercaoComParametros {
             Integer id = resultSet.getInt(1);
             System.out.println("O id criado para o produto é " + id);
         }
+        System.out.println("Fechando a conexão!!!");
+        //Fechando a conexão
+        connection.close();
     }
 }
