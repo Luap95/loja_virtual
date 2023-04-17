@@ -2,7 +2,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
@@ -14,6 +13,9 @@ public class ConnectionFactory {
         comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC");
         comboPooledDataSource.setUser("root");
         comboPooledDataSource.setPassword("bd@Lucas95");
+
+        comboPooledDataSource.setMaxPoolSize(10);
+
         //atribuindo o pool de conexões para a datasource
         this.dataSource = comboPooledDataSource;
     }
