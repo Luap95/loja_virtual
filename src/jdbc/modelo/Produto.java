@@ -11,6 +11,8 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public Produto(){}
+
     public String getNome() {
         return nome;
     }

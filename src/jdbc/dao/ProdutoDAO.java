@@ -3,6 +3,8 @@ package jdbc.dao;
 import jdbc.modelo.Produto;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoDAO {
 
@@ -29,5 +31,27 @@ public class ProdutoDAO {
                 }
             }
         }
+    }
+
+    public List<Produto> listar() throws SQLException {
+        List<Produto> produtos = new ArrayList<Produto>();
+
+        String sql = "SELECT * FROM PRODUTO";
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.execute();
+            try(ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()){
+                    Produto produto = new Produto();
+
+                    produto.setId(resultSet.getInt(1));
+                    produto.setNome(resultSet.getString(2));
+                    produto.setDescricao(resultSet.getString(3));
+
+                    produtos.add(produto);
+                }
+            }
+        }
+        return produtos;
     }
 }
