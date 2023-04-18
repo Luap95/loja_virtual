@@ -1,5 +1,6 @@
 package teste;
 
+import jdbc.dao.ProdutoDAO;
 import jdbc.modelo.Produto;
 import jdbc.ConnectionFactory;
 
@@ -12,22 +13,8 @@ public class TestaInsercaoComProduto {
         Produto comoda = new Produto("Cômoda", "Cômoda vertical");
 
         try(Connection connection = new ConnectionFactory().RecuperaConexao()){
-            String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (? , ?)";
-
-            try(PreparedStatement preparedStatement = connection.prepareStatement(sql,
-                    Statement.RETURN_GENERATED_KEYS)){
-                preparedStatement.setString(1, comoda.getNome());
-                preparedStatement.setString(2, comoda.getDescricao());
-
-                preparedStatement.execute();
-
-                try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
-                    while ((resultSet.next())){
-                        comoda.setId(resultSet.getInt(1));
-
-                    }
-                }
-            }
+            ProdutoDAO produtoDAO = new ProdutoDAO(connection);
+            produtoDAO.salvar(comoda);
         }
         System.out.println(comoda);
     }
