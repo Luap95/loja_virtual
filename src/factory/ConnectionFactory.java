@@ -1,4 +1,4 @@
-package jdbc;
+package factory;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -21,8 +21,12 @@ public class ConnectionFactory {
         //atribuindo o pool de conexões para a datasource
         this.dataSource = comboPooledDataSource;
     }
-    public Connection RecuperaConexao() throws SQLException {
+    public Connection RecuperaConexao()  {
         //recuperando a conexão já aberta pelo pool
-        return this.dataSource.getConnection();
+        try {
+            return this.dataSource.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

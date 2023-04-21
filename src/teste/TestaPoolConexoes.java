@@ -1,6 +1,6 @@
 package teste;
 
-import jdbc.ConnectionFactory;
+import factory.ConnectionFactory;
 
 import java.sql.SQLException;
 

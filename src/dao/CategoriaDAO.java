@@ -1,7 +1,7 @@
-package jdbc.dao;
+package dao;
 
-import jdbc.modelo.Categoria;
-import jdbc.modelo.Produto;
+import modelo.Categoria;
+import modelo.Produto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,24 +16,29 @@ public class CategoriaDAO {
         this.connection = connection;
     }
 
-    public List<Categoria> listar() throws SQLException {
-        List<Categoria> categorias = new ArrayList<Categoria>();
-        String sql = "SELECT * FROM CATEGORIA";
+    public List<Categoria> listar()  {
+        try {
+            List<Categoria> categorias = new ArrayList<Categoria>();
+            String sql = "SELECT * FROM CATEGORIA";
 
-        try(PreparedStatement preparedStatement = this.connection.prepareStatement(sql)){
-            preparedStatement.execute();
-            try(ResultSet resultSet = preparedStatement.getResultSet()){
-                while (resultSet.next()){
-                    Categoria categoria = new Categoria();
+            try(PreparedStatement preparedStatement = this.connection.prepareStatement(sql)){
+                preparedStatement.execute();
+                try(ResultSet resultSet = preparedStatement.getResultSet()){
+                    while (resultSet.next()){
+                        Categoria categoria = new Categoria();
 
-                    categoria.setId(resultSet.getInt(1));
-                    categoria.setNome(resultSet.getString(2));
+                        categoria.setId(resultSet.getInt(1));
+                        categoria.setNome(resultSet.getString(2));
 
-                    categorias.add(categoria);
+                        categorias.add(categoria);
+                    }
                 }
             }
+            return categorias;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
-        return categorias;
+
     }
 
     public List<Categoria> listarComProdutos() throws SQLException{

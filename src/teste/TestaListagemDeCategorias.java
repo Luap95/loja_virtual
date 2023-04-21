@@ -1,9 +1,9 @@
 package teste;
 
-import jdbc.ConnectionFactory;
-import jdbc.dao.CategoriaDAO;
-import jdbc.modelo.Categoria;
-import jdbc.modelo.Produto;
+import factory.ConnectionFactory;
+import dao.CategoriaDAO;
+import modelo.Categoria;
+import modelo.Produto;
 
 import java.sql.Connection;
 import java.sql.SQLException;

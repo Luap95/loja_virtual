@@ -1,8 +1,8 @@
 package teste;
 
-import jdbc.dao.ProdutoDAO;
-import jdbc.modelo.Produto;
-import jdbc.ConnectionFactory;
+import dao.ProdutoDAO;
+import modelo.Produto;
+import factory.ConnectionFactory;
 
 import java.sql.*;
 import java.util.List;
@@ -24,6 +24,8 @@ public class TestaInsercaoComProduto {
 //                System.out.println(produto);
 //            }
             produtos.stream().forEach(lp -> System.out.println(lp));
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
         }
         System.out.println(comoda);
 
